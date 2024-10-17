@@ -4,7 +4,7 @@ REPO_URL="https://github.com/GhostRooter0953/discord-voice-ips/archive/refs/head
 DEST_DIR="/opt/tmp"
 ZIP_FILE="$DEST_DIR/light.zip"
 EXTRACTED_DIR="$DEST_DIR/discord-voice-ips-light"
-SCRIPT_TO_RUN="discord-voice-ips-light/ipset-adder.sh auto"
+SCRIPT_TO_RUN="ipset-adder.sh auto"
 
 if [ -d "$EXTRACTED_DIR" ]; then
     rm -rf "$EXTRACTED_DIR" > /dev/null 2>&1
