@@ -50,12 +50,10 @@ else
             CRON_ENTRY="0 0 * * * $EXTRACTED_DIR/$SCRIPT_TO_RUN"
             (crontab -l ; echo "$CRON_ENTRY") | crontab -
             echo "Задание добавлено: выполнение каждый день в полночь по МСК:"
-            crontab -l
         elif [[ $TIME_OPTION == "reboot" ]]; then
             CRON_ENTRY="@reboot $EXTRACTED_DIR/$SCRIPT_TO_RUN"
             (crontab -l ; echo "$CRON_ENTRY") | crontab -
             echo "Задание добавлено: выполнение при каждом перезапуске сервера:"
-            crontab -l
         else
             echo "Некорректный ввод. Задание не добавлено."
         fi
