@@ -49,20 +49,20 @@
 
 ## Пример использования crontab
 
-### Выполнение при каждом перезапуске устройства:
+**Выполнение при каждом перезапуске устройства:**
    ```crontab
    SHELL=/opt/bin/bash
    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
    ```
-### Выполнение каждый день в 00:00 по МСК:
+**Выполнение каждый день в 00:00 по МСК:**
    ```crontab
    SHELL=/opt/bin/bash
    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
    ```
 
-### В планах допилить следующее
+## В планах допилить следующее
 
 - `ipset-adder.sh`: парсинг существующих списков на основе регулярки ниже и предложение выбрать список, в который будет осуществляться импорт:
     ```bash
