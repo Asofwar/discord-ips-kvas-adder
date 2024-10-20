@@ -56,7 +56,7 @@
     @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
     ```
 
-2.**Выполнение каждый день в 00:00 по МСК:**
+2. **Выполнение каждый день в 00:00 по МСК:**
     ```crontab
     SHELL=/opt/bin/bash
     PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
