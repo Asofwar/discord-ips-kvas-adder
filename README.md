@@ -61,4 +61,18 @@
    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
    ```
+
+### В планах допилить следующее
+
+- `ipset-adder.sh`: парсинг существующих списков на основе регулярки ниже и предложение выбрать список, в который будет осуществляться импорт:
+    ```bash
+    ipset list -n | grep -vE '(NDM|UPNP)'
+    ```
+- `ipset-adder.sh`: добавить сценарий аналогичный `auto` для передачи имени списка в качестве аргумента
+- `kvas-ipset-adder.sh`: добавление возможности передать аргумент, который будет подставляться в крон задании в качестве аргумента для `ipset-adder.sh`:
+    ```bash
+    SCRIPT_TO_RUN="ipset-adder.sh auto $1"
+    ...
+    "0 0 * * * cd $EXTRACTED_DIR && /opt/bin/bash $SCRIPT_TO_RUN"
+    ```
 ---
