@@ -40,9 +40,9 @@
 1. Скачайте или клонируйте репозиторий на ваше устройство.
 2. Убедитесь, что у вас установлены все необходимые зависимости (например, `curl`, `unzip` и `bash`).
 3. Запустите скрипт:
-   ```bash
-   ./kvas-ipset-adder.sh
-   ```
+    ```bash
+    ./kvas-ipset-adder.sh
+    ```
 4. Следуйте инструкциям в терминале:
    - Если задание на обновление IPset уже существует, скрипт сообщит вам об этом.
    - Если задание не найдено, вам будет предложено выбрать время для его выполнения (полночь или перезапуск).
@@ -50,17 +50,17 @@
 ## Пример использования crontab
 
 **Выполнение при каждом перезапуске устройства:**
-   ```crontab
-   SHELL=/opt/bin/bash
-   PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
-   @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
-   ```
+    ```crontab
+    SHELL=/opt/bin/bash
+    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
+    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    ```
 **Выполнение каждый день в 00:00 по МСК:**
-   ```crontab
-   SHELL=/opt/bin/bash
-   PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
-   0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
-   ```
+    ```crontab
+    SHELL=/opt/bin/bash
+    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
+    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    ```
 
 ## В планах допилить следующее
 
