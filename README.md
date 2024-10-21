@@ -2,7 +2,7 @@
 
 ## Описание
 
-Этот скрипт предназначен для автоматизации процесса скачивания, распаковки и обновления списка IP-адресов в IPset с последующим добавлением задания в `crontab`. Задание может быть настроено для выполнения каждый день в 00:00 по МСК или при перезапуске устройства. Скрипт нацелен на роутеры с установленным **[KVAS](https://github.com/qzeleza/kvas)**.
+По мотивам **[репо](https://github.com/GhostRooter0953/discord-voice-ips)**, этот скрипт предназначен для автоматизации процесса скачивания, распаковки и обновления списка IP-адресов в IPset с последующим добавлением задания в `crontab`. Задание может быть настроено для выполнения каждый день в 00:00 по МСК или при перезапуске устройства. Скрипт нацелен на роутеры с установленным **[KVAS](https://github.com/qzeleza/kvas)**.
 
 ## Функциональность
 
@@ -40,25 +40,74 @@
 1. Скачайте или клонируйте репозиторий на ваше устройство.
 2. Убедитесь, что у вас установлены все необходимые зависимости (например, `curl`, `unzip` и `bash`).
 3. Запустите скрипт:
-   ```bash
-   ./kvas-ipset-adder.sh
-   ```
-4. Следуйте инструкциям в терминале:
+    ```bash
+    ./kvas-ipset-adder.sh
+    ```
+5. Следуйте инструкциям в терминале:
+   - Скрипт предложит изменить аргумент для запуска скрипта импорта IP-адресов.
+   - Нажмите Enter, чтобы оставить значение по умолчанию, или введите новый аргумент (имя листа IPset).
    - Если задание на обновление IPset уже существует, скрипт сообщит вам об этом.
    - Если задание не найдено, вам будет предложено выбрать время для его выполнения (полночь или перезапуск).
 
 ## Пример использования crontab
 
-### Выполнение при каждом перезапуске устройства:
-   ```crontab
-   SHELL=/opt/bin/bash
-   PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
-   @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
-   ```
-### Выполнение каждый день в 00:00 по МСК:
-   ```crontab
-   SHELL=/opt/bin/bash
-   PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
-   0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
-   ```
+1. **Выполнение при каждом перезапуске устройства:**
+    ```crontab
+    SHELL=/opt/bin/bash
+    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
+    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    ```
+
+2. **Выполнение каждый день в 00:00 по МСК:**
+    ```crontab
+    SHELL=/opt/bin/bash
+    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
+    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    ```
+
+3. **Выполнение каждый день в 00:00 по МСК и при перезапуске устройства:**
+    ```crontab
+    SHELL=/opt/bin/bash
+    PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
+    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    ```
+
+## Пример использования скрипта
+
+    ```bash
+    # ./kvas-ipset-adder.sh good_list
+    Скачивание https://github.com/GhostRooter0953/discord-voice-ips/archive/refs/heads/light.zip...
+    Распаковка /opt/tmp/light.zip в /opt/tmp...
+    Выдача прав на выполнение скриптов...
+    Некоторые или все задания на авто-импорт списков в IPset отсутствуют
+    Выберите, какие задания вы хотите добавить:
+    1. Полночь каждый день
+    2. При перезагрузке
+    3. Полночь каждый день и при перезагрузке
+    0. Не добавлять
+    Введите номер варианта (0-3): 2
+    Задание добавлено: выполнение при каждом перезапуске роутера
+    Импортируем списки в IPset лист сейчас? (y/n): y
+    Запуск импорта...
+    
+    Запущен режим list. Используем IPset лист: good_list
+    Генерируем списки в формате IPset из:
+     - ./main_domains/discord-main-ip-list
+     - ./voice_domains/discord-voice-ip-list
+    IPset лист good_list создан
+    Загружено 1486 IP адреса(ов) в IPset лист good_list
+    Приехали
+    ```
+
+## Дополнительная информация
+
+**Выбор аргумента для запуска скрипта импорта IP-адресов:**
+
+ - Аргумент определяет режим работы скрипта `ipset-adder.sh`
+ - Возможные варианты:
+    `auto` — автоматический режим с использованием списка unblock
+    `list <имя>` — использование указанного списка IPset
+При запуске `kvas-ipset-adder.sh` вы можете указать этот аргумент или изменить его в интерактивном режиме
+
 ---
