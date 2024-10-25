@@ -99,6 +99,7 @@ ns1.cloudflare.net
 
 [discord]
 *dis.gd
+*discord-attachments-uploads-prd.storage.googleapis.com
 *discord-activities.com
 *discord.co
 *discord.com
@@ -112,6 +113,7 @@ ns1.cloudflare.net
 *discord.store
 *discord.tools
 *discordactivities.com
+*stable.dl2.discordapp.net
 *discordapp.com
 *discordapp.net
 *discordcdn.com
