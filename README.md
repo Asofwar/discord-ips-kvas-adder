@@ -75,7 +75,7 @@
 
 ## Пример использования скрипта
 
-    ```bash
+```bash
     # ./kvas-ipset-adder.sh good_list
     Скачивание https://github.com/GhostRooter0953/discord-voice-ips/archive/refs/heads/light.zip...
     Распаковка /opt/tmp/light.zip в /opt/tmp...
@@ -98,7 +98,7 @@
     IPset лист good_list создан
     Загружено 1486 IP адреса(ов) в IPset лист good_list
     Приехали
-    ```
+```
 
 ## Дополнительная информация
 
