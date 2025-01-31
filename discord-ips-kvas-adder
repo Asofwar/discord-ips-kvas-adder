@@ -1,17 +1,34 @@
 #!/opt/bin/bash
 
-REPO_URL="https://github.com/GhostRooter0953/discord-voice-ips/archive/refs/heads/light.zip"
 DEST_DIR="/opt/tmp"
-ZIP_FILE="$DEST_DIR/light.zip"
-EXTRACTED_DIR="$DEST_DIR/discord-voice-ips-light"
+KVAS_EXISTS=false
 
-ARGUMENT="${1:-auto}"
+if ipset list -n 2>/dev/null | grep -qw KVAS_LIST; then
+    KVAS_EXISTS=true
+    REPO_URL="https://github.com/GhostRooter0953/discord-voice-ips/archive/refs/heads/light.zip"
+    ZIP_FILE="$DEST_DIR/light.zip"
+    EXTRACTED_DIR="$DEST_DIR/discord-voice-ips-light"
+else
+    REPO_URL="https://github.com/GhostRooter0953/discord-voice-ips/archive/refs/heads/light-no-timeout.zip"
+    ZIP_FILE="$DEST_DIR/light-no-timeout.zip"
+    EXTRACTED_DIR="$DEST_DIR/discord-voice-ips-light-no-timeout"
+fi
+
+if $KVAS_EXISTS; then
+    DEFAULT_LIST="KVAS_LIST"
+else
+    DEFAULT_LIST="unblock"
+fi
 
 if [ -z "$1" ]; then
-    read -p "Какой IPset лист используем? (по умолчанию будет использоваться 'unblock'): " NEW_ARG
+    read -p "Какой IPset лист используем? (по умолчанию '$DEFAULT_LIST'): " NEW_ARG
     if [ -n "$NEW_ARG" ]; then
         ARGUMENT="$NEW_ARG"
+    else
+        ARGUMENT="$DEFAULT_LIST"
     fi
+else
+    ARGUMENT="$1"
 fi
 
 if [ "$ARGUMENT" = "auto" ]; then
@@ -29,7 +46,6 @@ fi
 
 echo "Скачивание $REPO_URL..."
 curl -L -o "$ZIP_FILE" "$REPO_URL" > /dev/null 2>&1
-
 if [ $? -ne 0 ]; then
     echo "Ошибка при загрузке репозитория"
     exit 1
@@ -37,7 +53,6 @@ fi
 
 echo "Распаковка $ZIP_FILE в $DEST_DIR..."
 unzip -o "$ZIP_FILE" -d "$DEST_DIR" > /dev/null 2>&1
-
 if [ $? -ne 0 ]; then
     echo "Ошибка при распаковке репозитория"
     exit 1
@@ -80,7 +95,6 @@ if $MIDNIGHT_CRON_EXISTS && $REBOOT_CRON_EXISTS; then
 else
     echo "Некоторые или все задания на авто-импорт списков в IPset отсутствуют"
     echo "Выберите, какие задания вы хотите добавить:"
-    OPTIONS=()
     if ! $MIDNIGHT_CRON_EXISTS && ! $REBOOT_CRON_EXISTS; then
         echo "1. Полночь каждый день"
         echo "2. При перезагрузке"
@@ -142,7 +156,6 @@ else
                 ;;
         esac
     fi
-
     if [[ "$TIME_OPTION" =~ ^[1-3]$ ]]; then
         echo "$CRONTAB_OUTPUT" | crontab -
     fi
