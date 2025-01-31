@@ -104,8 +104,8 @@
     Генерируем списки в формате IPset из:
      - ./main_domains/discord-main-ip-list
      - ./voice_domains/discord-voice-ip-list
-    IPset лист good_list создан
-    Загружено 1486 IP адреса(ов) в IPset лист good_list
+    IPset лист KVAS_LIST уже существует
+    Загружено 1486 IP адреса(ов) в IPset лист KVAS_LIST
     Приехали
 ```
 
