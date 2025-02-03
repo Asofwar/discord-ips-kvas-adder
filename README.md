@@ -61,7 +61,7 @@
     ```crontab
     SHELL=/opt/bin/bash
     PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
-    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh unblock
     ```
     _пример для релизной версии KVAS_
 
@@ -69,7 +69,7 @@
     ```crontab
     SHELL=/opt/bin/bash
     PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
-    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh list KVAS_LIST
+    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh KVAS_LIST
     ```
     _пример для актуальной версии KVAS_
 
@@ -77,8 +77,8 @@
     ```crontab
     SHELL=/opt/bin/bash
     PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin
-    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
-    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh auto
+    @reboot cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh unblock
+    0 0 * * * cd /opt/tmp/discord-voice-ips-light && /opt/bin/bash ipset-adder.sh unblock
     ```
     _пример для релизной версии KVAS_
 
@@ -113,17 +113,14 @@
 
 ### Выбор аргумента для запуска скрипта импорта IP-адресов
 
-- Аргумент определяет режим работы вызываемого скрипта `ipset-adder.sh`
-- Возможные варианты работы скрипта `ipset-adder.sh`:
-  - `auto` — автоматический режим с использованием списка по умолчанию `unblock`
-  - `list <имя>` — автоматический режим с использованием указанного списка IPset
-- Следовательно, чтобы использовать режим `auto`, достаточо передать его в качестве аргумента (_подходит для релизной версии КВАСа_):
-```bash
-./discord-ips-kvas-adder.sh auto
-```
-- Чтобы использовать режим `list`, вы можете передать имя списка в качестве аргумента (_рекомендуемый способ для бета-версии КВАСа_):
+- Аргумент определяет для какого IPset листа будет сгенерирован и импортирован список с IP адресами Discord. Пример:
 ```bash
 ./discord-ips-kvas-adder.sh KVAS_LIST
+```
+- В скрипте реализована автоматическая 'проверка' версии KVAS при запуске в интерактивном режиме. Логика которого: наличие IPset листа unblock указывает на релизную версию, а значит будет стянут репо с ветки [light-no-timeout](https://github.com/GhostRooter0953/discord-voice-ips/tree/light-no-timeout). В противном случае скрипт посчитает, что установлена актуальная версия KVAS и стянет репо с ветки [light](https://github.com/GhostRooter0953/discord-voice-ips/tree/light). Пример работы (_оверрайдится IPset по умолчанию_):
+```bash
+# ./discord-ips-kvas-adder.sh
+Какой IPset лист используем? (по умолчанию 'KVAS_LIST'):
 ```
 
 ### Список основных доменов с тэгами
