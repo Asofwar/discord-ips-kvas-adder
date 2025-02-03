@@ -31,12 +31,7 @@ else
     ARGUMENT="$1"
 fi
 
-if [ "$ARGUMENT" = "auto" ]; then
-    SCRIPT_TO_RUN="ipset-adder.sh auto"
-else
-    SCRIPT_TO_RUN="ipset-adder.sh list $ARGUMENT"
-fi
-
+SCRIPT_TO_RUN="ipset-adder.sh $ARGUMENT"
 CRON_SHELL_PATH="SHELL=/opt/bin/bash"
 CRON_PATH="PATH=/opt/bin:/usr/sbin:/usr/bin:/bin:/sbin:/opt/sbin"
 
