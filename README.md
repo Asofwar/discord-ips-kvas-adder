@@ -117,7 +117,7 @@
 ```bash
 ./discord-ips-kvas-adder.sh KVAS_LIST
 ```
-- В скрипте реализована автоматическая 'проверка' версии KVAS при запуске в интерактивном режиме. Логика которого: наличие IPset листа unblock указывает на релизную версию, а значит будет стянут репо с ветки [light-no-timeout](https://github.com/GhostRooter0953/discord-voice-ips/tree/light-no-timeout). В противном случае скрипт посчитает, что установлена актуальная версия KVAS и стянет репо с ветки [light](https://github.com/GhostRooter0953/discord-voice-ips/tree/light). Пример работы (_оверрайдится IPset по умолчанию_):
+- В скрипте реализована автоматическая 'проверка' версии KVAS при запуске в интерактивном режиме. Логика которого: отсутствие IPset листа `KVAS_LIST` указывает на релизную версию, а значит будет стянут репо с ветки [light-no-timeout](https://github.com/GhostRooter0953/discord-voice-ips/tree/light-no-timeout). В противном случае скрипт посчитает, что установлена актуальная версия KVAS и стянет репо с ветки [light](https://github.com/GhostRooter0953/discord-voice-ips/tree/light). Пример работы в интерактивном режиме (_оверрайдится имя IPset-листа по умолчанию_):
 ```bash
 # ./discord-ips-kvas-adder.sh
 Какой IPset лист используем? (по умолчанию 'KVAS_LIST'):
