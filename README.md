@@ -38,7 +38,7 @@
 
 ## 🚀 Как использовать
 
-1. Скачайте или клонируйте репозиторий на ваш роутер. Можно таким образом:
+1. Скачайте скрипт на ваш роутер. Можно таким образом:
     ```bash
     curl -sSL https://raw.githubusercontent.com/GhostRooter0953/discord-ips-kvas-adder/master/discord-ips-kvas-adder.sh > /opt/tmp/discord-ips-kvas-adder.sh && chmod +x /opt/tmp/discord-ips-kvas-adder.sh
     ```
